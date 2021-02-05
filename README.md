@@ -10,7 +10,7 @@ This API is developed based on below technologies
   
   3. I have created 2 tables nad insert some test data. For this, we just need run below sql scripts. Infact I can add it to Spring boot project, But I am busy with my work and        its almost 2 days of your deadline is about to finish.
   
-  4. No test cases implemented ( Its not aked in your Assesment) :-)
+  4. No test cases implemented ( It was not asked in your Assesment) :-) If its required I can add them.
   
   
 
