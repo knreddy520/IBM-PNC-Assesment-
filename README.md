@@ -6,68 +6,34 @@ This API is developed based on below technologies
   
   2. I have used  Java8+Springboot+Hibernate+Oracle to implement this logic.
   
-  2. As Hibernate wont allow to create a table without PK. I have created TRASNACTION_ID column for ACCOUNT_TRANSACTIONS table.
+  3. I have created Kafka producer with spring boot to publish the message on Kafka topic.
   
-  3. I have created 2 tables nad insert some test data. For this, we just need run below sql scripts. Infact I can add it to Spring boot project, But I am busy with my work and        its almost 2 days of your deadline is about to finish.
+  4. As Hibernate wont allow to create a table without PK. I have created TRASNACTION_ID column for ACCOUNT_TRANSACTIONS table.
   
-  4. No test cases implemented ( It was not asked in your Assesment) :-) If its required I can add them.
+  5. I have created 2 tables nad insert some test data. For this, we just need run below sql scripts. Infact I can add it to Spring boot project, But I am busy with my work and        its almost 2 days of your deadline is about to finish.
   
+  6. No test cases implemented ( It was not asked in your Assesment) :-) If its required I can add them.
   
-
-create table ACCOUNT_DETAILS(
-
-    ACCOUNT_NUMBER number not null,
-    LAST_UPD_BY timestamp,
-    AMOUNT number,
+  create table ACCOUNT_DETAILS(
+TRANSACTION_ID number not null,
+ACCOUNT_NUMBER varchar2(100) not null,
+LAST_UPD_BY timestamp,
+AMOUNT number,
+PRIMARY KEY (TRANSACTION_ID)
+);
     
-    PRIMARY KEY (ACCOUNT_NUMBER)
-    );
-    
-drop table ACCOUNT_TRANSACTION_DETAILS;
 
-create table ACCOUNT_TRANSACTION_DETAILS(
-    TRANSACTION_ID number not null,
-    ACCOUNT_NUMBER number not null,
-    TRANSACTION_TS timestamp not null,
-    TRANSACTION_TYPE varchar2(30) not null,
-    TRANSACTION_AMOUNT number not null,
-    
-    PRIMARY KEY (TRANSACTION_ID),
-    FOREIGN KEY (ACCOUNT_NUMBER) references ACCOUNT_DETAILS(ACCOUNT_NUMBER)
-    );
+create table ACCOUNT_TRANSACTION_DETAILS( 
+TRANSACTION_ID number not null,
+ACCOUNT_NUMBER varchar2(100) not null,
+TRANSACTION_TS timestamp not null,
+TRANSACTION_TYPE varchar2(30) not null,
+TRANSACTION_AMOUNT number not null,
+PRIMARY KEY (TRANSACTION_ID)
+);
  
  commit;
  
- insert into  ACCOUNT_DETAILS(ACCOUNT_NUMBER,LAST_UPD_BY,AMOUNT) values (100,systimestamp,20.12);
- insert into  ACCOUNT_DETAILS(ACCOUNT_NUMBER,LAST_UPD_BY,AMOUNT) values (101,systimestamp,120.99);
- insert into  ACCOUNT_DETAILS(ACCOUNT_NUMBER,LAST_UPD_BY,AMOUNT) values (102,systimestamp,200.00);
- insert into  ACCOUNT_DETAILS(ACCOUNT_NUMBER,LAST_UPD_BY,AMOUNT) values (103,systimestamp,999);
- 
- commit;
- 
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (1,101,systimestamp,'WITHDRAW',45.00);
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (2,101,systimestamp,'DEPOSIT',10.00);
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (3,101,systimestamp,'WITHDRAW',15.00);
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (4,102,systimestamp,'DEPOSIT',20.00);
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (5,102,systimestamp,'WITHDRAW',50.00);
- 
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (6,101,systimestamp,'DEPOSIT',13.00);
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (7,101,systimestamp,'DEPOSIT',12.00);
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (8,101,systimestamp,'DEPOSIT',11.00);
- 
-  insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (9,101,systimestamp,'DEPOSIT',14.00);
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (10,101,systimestamp,'DEPOSIT',15.00);
-
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (11,101,systimestamp,'WITHDRAW',13.00);
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (12,101,systimestamp,'WITHDRAW',12.00);
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (13,101,systimestamp,'WITHDRAW',11.00);
- 
-  insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (14,101,systimestamp,'WITHDRAW',14.00);
- insert into ACCOUNT_TRANSACTION_DETAILS(TRANSACTION_ID,ACCOUNT_NUMBER,TRANSACTION_TS,TRANSACTION_TYPE,TRANSACTION_AMOUNT) values (15,101,systimestamp,'WITHDRAW',15.00);
-
-
-
- commit;
  
  
  
